@@ -1,0 +1,84 @@
+<html>
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="style.css">
+  <!-- <script src="https://aframe.io/releases/1.4.2/aframe.min.js"></script> -->
+  <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.2/dist/mindar-face-aframe.prod.js"></script>
+</head>
+
+<body>
+  <div class="container-options">
+    <div class="options-panel">
+      <button class="seleccionable opcion1">Opcion 1</button>
+      <button class="seleccionable opcion2">Opcion 2</button>
+      <button class="seleccionable opcion3">Opcion 3</button>
+    </div>
+  </div>
+  <a-scene mindar-face embedded color-space="sRGB" renderer="colorManagement: true, physicallyCorrectLights"
+    vr-mode-ui="enabled: false" device-orientation-permission-ui="enabled: false">
+    <a-assets>
+      <a-asset-item id="glassesModel"
+        src="https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.2.2/examples/face-tracking/assets/glasses/scene.gltf"></a-asset-item>
+      <a-asset-item id="clownModel" src="./joker/scene.gltf"></a-asset-item>
+      <a-asset-item id="demonModel" src="./mask/scene.gltf"></a-asset-item>
+      <a-asset-item id="pikachu" src="./pikachu/scene.gltf"></a-asset-item>
+      <a-asset-item id="payaso" src="./joker/scene.gltf"></a-asset-item>
+    </a-assets>
+
+    <a-camera active="false" position="0 0 0"></a-camera>
+
+    <a-entity mindar-face-target="anchorIndex: 151">
+      <a-gltf-model id="payasoMask" rotation="0 0 0" position="0 0 0" scale="6 6 6" src="#payaso"
+        visible="true"></a-gltf-model>
+    </a-entity>
+
+    <a-entity mindar-face-target="anchorIndex: 94">
+      <a-gltf-model id="modeloPikachu" rotation="0 0 0" position="0 0 0" scale="8 8 8" src="#pikachu"
+        visible="false"></a-gltf-model>
+    </a-entity>
+
+    <a-entity mindar-face-target="anchorIndex: 8">
+      <a-gltf-model id="modeloDemon" rotation="0 180 0" position="0 0 0" scale="0.9 0.9 0.9" src="#demonModel"
+        visible="false"></a-gltf-model>
+    </a-entity>
+
+    <a-entity mindar-face-target="anchorIndex: 151">
+      <a-gltf-model id="modeloClown" rotation="0 0 0" position="0 0 0" scale="6 6 6" src="#clownModel"
+        visible="false"></a-gltf-model>
+    </a-entity>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        function mostrarModelo(modelo) {
+          // Ocultar todos los modelos
+          document.getElementById('payasoMask').setAttribute('visible', false);
+          document.getElementById('modeloPikachu').setAttribute('visible', false);
+          document.getElementById('modeloDemon').setAttribute('visible', false);
+          document.getElementById('modeloClown').setAttribute('visible', false);
+
+          // Mostrar el modelo seleccionado
+          document.getElementById(`modelo${modelo}`).setAttribute('visible', true);
+        }
+
+        const btn1 = document.querySelector('.opcion1');
+        btn1.addEventListener('click', function () {
+          mostrarModelo('Pikachu');
+        });
+
+        const btn2 = document.querySelector('.opcion2');
+        btn2.addEventListener('click', function () {
+          mostrarModelo('Demon');
+        });
+
+        const btn3 = document.querySelector('.opcion3');
+        btn3.addEventListener('click', function () {
+          mostrarModelo('Clown');
+        });
+      });
+    </script>
+  </a-scene>
+</body>
+
+</html>

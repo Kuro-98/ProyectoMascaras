@@ -1,0 +1,47 @@
+html {
+  box-sizing: border-box;
+  font-size: 62.5%;
+  padding: 0;
+  margin: 0;
+  /* 1REM = 10px */
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+  padding: 0;
+  margin: 0;
+}
+
+.container-options {
+  display: flex;
+  justify-content: center;
+  background: #000;
+}
+
+/* Estilos para botones seleccionables */
+.seleccionable {
+  display: inline-block;
+  padding: 10px 20px;
+  margin: 5px;
+  font-size: 16px;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  border: 2px solid #3498db;
+  /* Color del borde */
+  border-radius: 5px;
+  color: #3498db;
+  /* Color del texto */
+  background-color: white;
+  /* Color de fondo */
+  transition: background-color 0.3s, color 0.3s;
+  z-index: 10;
+}
+
+/* Cambio de estilo al pasar el mouse */
+.seleccionable:hover {
+  background-color: #3498db;
+  color: white;
+}
